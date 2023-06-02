@@ -20,8 +20,8 @@ function App() {
    
    const navigate = useNavigate();
    const [access, setAccess] = useState(false);
-   const EMAIL = 'noob_master69@hotmail.com';
-   const PASSWORD = 'fortnite1';
+ /*  const EMAIL = 'noob_master69@hotmail.com';
+   const PASSWORD = 'fortnite1';*/
    const [characters, setCharacters ]= useState([]);
    
 
@@ -31,6 +31,7 @@ function App() {
       const URL = 'http://localhost:3001/rickandmorty/login';
       const {data}= await axios(URL + `?email=${email}&password=${password}`)
       const { access } = data;
+      console.log(data)
       
          if (access){
             setAccess(data);
@@ -39,7 +40,8 @@ function App() {
             throw Error("email y contraseña erroneas")
          }
       } catch (error) {
-         window.alert(error.message)
+        // error.response.data, la res.status().send() es tomada como error y este tiene la propiedad response con el data que es donde esta el .send()
+         window.alert(error.response.data)
       }
    }
 

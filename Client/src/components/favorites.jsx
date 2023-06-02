@@ -7,8 +7,8 @@ import { useState } from "react";
 
     
     //const allCharacters= useSelector((state)=> state.allCharacters)
-    const myFavorites= useSelector((state)=> state.myFavorites)
     //const Characters= !aux? allCharacters: myFavorites;
+    const myFavorites= useSelector((state)=> state.myFavorites)
 
     const dispatch= useDispatch();
     

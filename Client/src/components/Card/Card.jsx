@@ -41,7 +41,7 @@ useEffect(() => {
          setIsFav(true);
       }
    });
-}, [myFavorites,props.id]);
+}, [myFavorites]);
 
     return (
        <div className={uno.Class}>

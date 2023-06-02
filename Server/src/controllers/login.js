@@ -1,17 +1,23 @@
-const {users} = require ("../utils/users")
-function login (req, res){
-    console.log(req.query)
-    const {email, password } = req.query
-    const acceso= users.find((user)=> user.email=== email && user.password=== password)
+const {User}= require("../DB_connection");
 
-   return acceso? res.status(200).json({access: true}): res.status(200).json({access: false})
-                                               //status(404) esto ya indica que sera rejected y con un error
+async function login(req, res){
+    const {email, password}= req.query;
+    if(!email || !password){
+        res.status(400).send("faltan datos")
+    }else{
+        try {
+            const user = await User.findOne({where:{email: email}})
+            if(!user){
+                res.status(404).send("Usuario no encontrado")
+            }else{
+                user.password=== password? res.json({access: true}): res.status(403).send("Contraseña incorrecta")
+            }
+        
+        } catch (error) {
+            res.status(500).send(error.message)
+        }
+    }
+
 }
 
-module.exports={login}
-
-
-
-
-//return acceso? res.status(200).json({access: true}): res.status(404).send("incorrecto")
-//esto era para enviar status(404) que ya indica que seria rejected con un error
+module.exports= login
