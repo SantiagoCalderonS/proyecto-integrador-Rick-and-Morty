@@ -12,6 +12,7 @@ async function login(req, res){
             }else{
                 user.password=== password? res.json({access: true}): res.status(403).send("Contraseña incorrecta")
             }
+            res.json({access: true})
         
         } catch (error) {
             res.status(500).send(error.message)
